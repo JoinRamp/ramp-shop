@@ -24,9 +24,9 @@ export default function Card({ product }: { product: Product }) {
     amount: product.sale_price ? product.sale_price : product.price,
     baseAmount: product.price,
   });
-  const goToDetailsPage = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const goToContactUsPage = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    Router.push(routes.productUrl(slug));
+    Router.push('contact-us');
   };
   const { t } = useTranslation('common');
   const isFreeItem = isFree(product?.sale_price ?? product?.price);
@@ -52,7 +52,7 @@ export default function Card({ product }: { product: Product }) {
           onClick={() => openModal('PRODUCT_DETAILS', { slug })}
           className="absolute left-0 top-0 z-10 flex h-full w-full cursor-pointer items-center justify-center gap-9 bg-dark/60 p-4 opacity-0 backdrop-blur-sm transition-all group-hover:gap-5 group-hover:opacity-100 dark:bg-dark/70"
         >
-          <button
+          {/* <button
             className={cn(
               'text-center font-medium text-light',
               isGridCompact ? 'text-xs' : 'text-13px'
@@ -69,25 +69,25 @@ export default function Card({ product }: { product: Product }) {
               />
             </div>
             {t('text-preview')}
-          </button>
+          </button> */}
           <button
-            onClick={goToDetailsPage}
+            onClick={goToContactUsPage}
             className={cn(
               'relative z-[11] text-center font-medium text-light',
-              isGridCompact ? 'text-xs' : 'text-13px'
+              isGridCompact ? 'text-xs' : 'text-13px',
             )}
           >
             <div
               className={cn(
                 'mb-2 flex items-center justify-center rounded-full bg-dark-800 text-light backdrop-blur-sm transition-all hover:bg-brand',
-                isGridCompact ? 'h-11 w-11' : 'h-[50px] w-[50px]'
+                isGridCompact ? 'h-11 w-11' : 'h-[50px] w-[50px]',
               )}
             >
               <DetailsIcon
                 className={cn(isGridCompact ? 'h-4 w-4' : 'h-5 w-5')}
               />
             </div>
-            {t('text-details')}
+            {'Become a Seller'}
           </button>
         </div>
       </div>
@@ -109,14 +109,14 @@ export default function Card({ product }: { product: Product }) {
             title={name}
             className="mb-0.5 truncate font-medium text-dark-100 dark:text-light"
           >
-            <AnchorLink href={routes.productUrl(slug)}>{name}</AnchorLink>
+            <AnchorLink href={routes.contact}>{name}</AnchorLink>
           </h3>
-          <AnchorLink
+          {/* <AnchorLink
             href={routes.shopUrl(shop?.slug)}
             className="font-medium text-light-base hover:text-brand dark:text-dark-800 dark:hover:text-brand"
           >
             {shop?.name}
-          </AnchorLink>
+          </AnchorLink> */}
         </div>
 
         <div className="flex flex-shrink-0 flex-col items-end pl-2.5">

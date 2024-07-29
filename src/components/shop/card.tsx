@@ -31,9 +31,9 @@ export default function Card({ shop }: { shop: Shop }) {
       <h3 className="mb-1 text-13px font-medium text-dark transition-colors group-hover:text-brand dark:text-light">
         {name}
       </h3>
-      <div className="font-medium text-dark-800 dark:text-dark-base">
+      {/* <div className="font-medium text-dark-800 dark:text-dark-base">
         {products_count} {t('text-products')}
-      </div>
+      </div> */}
     </motion.div>
   );
 }
