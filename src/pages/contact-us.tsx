@@ -65,45 +65,19 @@ const ContactUsPage: NextPageWithLayout = () => {
                 icon={<LocationIcon className="h-12 w-12" />}
                 title={t('contact-us-office-title')}
                 description={
-                  contactDetails?.location?.formattedAddress ??
-                  t('contact-us-office-message')
+                  '17, Fatai Aina Close,  Ojodu Estate, Ojo Lagos State'
                 }
               />
               <ContactInfo
                 icon={<PhoneIcon className="h-10 w-10" />}
                 title={t('contact-us-phone-title')}
-                description={
-                  contactDetails?.contact ?? t('contact-us-phone-message')
-                }
+                description={'+234 9123200364'}
               />
               <ContactInfo
                 icon={<MailIcon className="h-10 w-10" />}
                 title={t('contact-us-site-title')}
-                description={
-                  contactDetails?.website ?? t('contact-us-site-message')
-                }
+                description={'https://www.joinramp.co/'}
               />
-              {!isEmpty(contactDetails?.socials) ? (
-                <div className="flex items-center gap-5">
-                  {contactDetails?.socials?.map(({ icon, url }, idx) => (
-                    <Link
-                      key={idx}
-                      href={url}
-                      target="_blank"
-                      className="group flex items-center"
-                    >
-                      {getIcon({
-                        iconList: socialIcons,
-                        iconName: icon,
-                        className:
-                          'w-4 h-4 text-dark-800 dark:text-light-900 shrink-0',
-                      })}
-                    </Link>
-                  ))}
-                </div>
-              ) : (
-                ''
-              )}
             </div>
           </div>
           <div className="w-full flex-grow pt-12 lg:p-10 xl:p-12">

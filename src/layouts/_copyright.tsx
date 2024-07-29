@@ -14,7 +14,7 @@ export default function Copyright({ className }: { className?: string }) {
         href={settings?.siteLink ?? routes?.home}
         target="_blank"
       >
-        {'JoinRamp'}
+        {'Ramp'}
       </Link>
       . {'Copyright'} © {'Ramp '}
       <Link

@@ -49,7 +49,7 @@ export default function Grid({
               isGridCompact,
             '2xl:grid-cols-3 3xl:grid-cols-[repeat(auto-fill,minmax(340px,1fr))] 4xl:grid-cols-[repeat(auto-fill,minmax(380px,1fr))]':
               !isGridCompact,
-          }
+          },
         )}
       >
         {isLoading && !products.length
@@ -61,7 +61,7 @@ export default function Grid({
             ))}
       </motion.div>
 
-      {hasNextPage && (
+      {/* {hasNextPage && (
         <div className="mt-8 grid place-content-center md:mt-10">
           <Button
             onClick={onLoadMore}
@@ -71,7 +71,7 @@ export default function Grid({
             {t('text-loadmore')}
           </Button>
         </div>
-      )}
+      )} */}
     </div>
   );
 }

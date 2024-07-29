@@ -24,7 +24,9 @@ export default function Card({ product }: { product: Product }) {
     amount: product.sale_price ? product.sale_price : product.price,
     baseAmount: product.price,
   });
-  const goToContactUsPage = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const goToContactUsPage = (
+    e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>,
+  ) => {
     e.stopPropagation();
     Router.push('contact-us');
   };
@@ -49,7 +51,7 @@ export default function Card({ product }: { product: Product }) {
               33vw"
         />
         <div
-          onClick={() => openModal('PRODUCT_DETAILS', { slug })}
+          onClick={goToContactUsPage}
           className="absolute left-0 top-0 z-10 flex h-full w-full cursor-pointer items-center justify-center gap-9 bg-dark/60 p-4 opacity-0 backdrop-blur-sm transition-all group-hover:gap-5 group-hover:opacity-100 dark:bg-dark/70"
         >
           <button
@@ -69,7 +71,7 @@ export default function Card({ product }: { product: Product }) {
                 className={cn(isGridCompact ? 'h-4 w-4' : 'h-5 w-5')}
               />
             </div>
-            {'Become a Seller'}
+            {'Become A Reseller'}
           </button>
         </div>
       </div>
