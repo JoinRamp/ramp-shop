@@ -42,7 +42,7 @@ function NavLink({ href, icon, title, isCollapse }: NavLinkProps) {
       <span
         className={cn(
           'flex flex-shrink-0 items-center justify-start',
-          isCollapse ? 'w-8 xl:w-auto' : 'w-auto xl:w-8'
+          isCollapse ? 'w-8 xl:w-auto' : 'w-auto xl:w-8',
         )}
       >
         {icon}
@@ -50,7 +50,7 @@ function NavLink({ href, icon, title, isCollapse }: NavLinkProps) {
       <span
         className={cn(
           'text-dark-100 dark:text-light-400',
-          isCollapse ? 'inline-flex xl:hidden' : 'hidden xl:inline-flex'
+          isCollapse ? 'inline-flex xl:hidden' : 'hidden xl:inline-flex',
         )}
       >
         {title}
@@ -79,8 +79,8 @@ export function Sidebar({
           width >= RESPONSIVE_WIDTH && underMaintenanceIsComing && !isScrolling
             ? 'pt-[9.625rem]'
             : '',
-          className
-        )
+          className,
+        ),
       )}
     >
       <Scrollbar className="relative h-full w-full">
@@ -104,7 +104,7 @@ export function Sidebar({
               isCollapse={isCollapse}
               icon={<ProductIcon className="h-4 w-4 text-current" />}
             />
-            <NavLink
+            {/* <NavLink
               title={t('text-top-authors')}
               href={routes.authors}
               isCollapse={isCollapse}
@@ -116,7 +116,7 @@ export function Sidebar({
               href={routes.feed}
               isCollapse={isCollapse}
               icon={<FeedIcon className="h-[17px] w-[17px] text-current" />}
-            />
+            /> */}
 
             <NavLink
               title={t('text-contact')}
@@ -127,28 +127,13 @@ export function Sidebar({
               }
             />
           </nav>
-
-          <nav className="mt-auto flex flex-col pb-4">
-            <NavLink
-              title={t('text-settings')}
-              href={routes.profile}
-              isCollapse={isCollapse}
-              icon={<SettingIcon className="h-[18px] w-[18px] text-current" />}
-            />
-            <NavLink
-              title={t('text-help-page-title')}
-              href={routes.help}
-              isCollapse={isCollapse}
-              icon={<HelpIcon className="h-[18px] w-[18px] text-current" />}
-            />
-          </nav>
         </div>
       </Scrollbar>
 
       <footer
         className={cn(
           'flex-col border-t border-light-400 pt-3 pb-4 text-center dark:border-dark-400',
-          isCollapse ? 'flex xl:hidden' : 'hidden xl:flex'
+          isCollapse ? 'flex xl:hidden' : 'hidden xl:flex',
         )}
       >
         <nav className="flex items-center justify-center gap-5 pb-1.5 text-13px font-medium capitalize tracking-[0.2px]">

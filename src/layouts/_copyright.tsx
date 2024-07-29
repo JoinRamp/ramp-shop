@@ -14,20 +14,16 @@ export default function Copyright({ className }: { className?: string }) {
         href={settings?.siteLink ?? routes?.home}
         target="_blank"
       >
-        {settings?.siteTitle}
+        {'JoinRamp'}
       </Link>
-      . {settings?.copyrightText}{' '}
-      {settings?.externalText ? (
-        <Link
-          className="text-heading font-medium hover:text-brand-dark"
-          href={settings?.externalLink ?? routes?.home}
-          target="_blank"
-        >
-          {settings?.externalText}
-        </Link>
-      ) : (
-        ''
-      )}
+      . {'Copyright'} © {'Ramp '}
+      <Link
+        className="text-heading font-medium hover:text-brand-dark"
+        href={settings?.externalLink ?? routes?.home}
+        target="_blank"
+      >
+        {'All rights reserved worldwide Ramp'}
+      </Link>
     </span>
   );
 }

@@ -29,25 +29,23 @@ const DefaultSeo = () => {
           href: '/manifest.json',
         },
       ]}
-      title={settings?.seo?.metaTitle}
-      titleTemplate={`${
-        settings?.siteTitle ?? settings?.seo?.metaTitle ?? 'Digital Download'
-      } | %s`}
-      defaultTitle="Pixer"
-      description={settings?.seo?.metaDescription || settings?.siteSubtitle}
+      title={'JoinRamp'}
+      titleTemplate={'Ramp'}
+      defaultTitle="Ramp"
+      description={'Ramp'}
       canonical={settings?.seo?.canonicalUrl}
       openGraph={{
         title: settings?.seo?.ogTitle,
         description: settings?.seo?.ogDescription,
         type: 'website',
         locale: 'en_US',
-        site_name: settings?.siteTitle,
+        site_name: 'Ramp',
         images: [
           {
-            url: settings?.seo?.ogImage?.original ?? '',
+            url: '/ramp-fav-black.svg',
             width: 800,
             height: 600,
-            alt: settings?.seo?.ogTitle,
+            alt: 'Ramp',
           },
         ],
       }}

@@ -71,26 +71,16 @@ export default function Header({
         <div className="relative flex items-center gap-5 pr-0.5 xs:gap-6 sm:gap-7">
           <SearchButton className="hidden sm:flex" />
           <ThemeSwitcher />
-          <GridSwitcher />
-          {asPath !== routes.checkout && (
-            <CartButton className="hidden sm:flex" />
-          )}
-          {isMultiLangEnable ? (
-            <div className="ltr:ml-auto rtl:mr-auto">
-              <LanguageSwitcher />
-            </div>
-          ) : (
-            ''
-          )}
+          {/* <GridSwitcher /> */}
           <a
             href={`${process.env.NEXT_PUBLIC_ADMIN_URL}/register`}
             target="_blank"
             rel="noreferrer"
             className="focus:ring-accent-700 hidden h-9 shrink-0 items-center justify-center rounded border border-transparent bg-brand px-3 py-0 text-sm font-semibold leading-none text-light outline-none transition duration-300 ease-in-out hover:bg-brand-dark focus:shadow focus:outline-none focus:ring-1 sm:inline-flex"
           >
-            {t('text-become-seller')}
+            {'Become A Reseller'}
           </a>
-          <LoginMenu />
+          {/* <LoginMenu /> */}
         </div>
       </header>
     </>

@@ -33,23 +33,23 @@ export default function Logo({
       >
         {isMounted && isDarkMode && (
           <Image
-            src={settings?.dark_logo?.original ?? darkLogo}
+            src={darkLogo}
             fill
             loading="eager"
-            alt={settings?.siteTitle ?? 'Dark Logo'}
+            alt={'Ramp Dark Logo'}
             className="object-contain"
             priority
-            sizes="(max-width: 768px) 100vw,
+            sizes="(max-width: 968px) 100vw,
               (max-width: 1200px) 50vw,
               33vw"
           />
         )}
         {isMounted && !isDarkMode && (
           <Image
-            src={settings?.logo?.original ?? lightLogo}
+            src={lightLogo}
             fill
             loading="eager"
-            alt={settings?.siteTitle ?? 'Light Logo'}
+            alt={'Ramp Light Logo'}
             className="object-contain"
           />
         )}

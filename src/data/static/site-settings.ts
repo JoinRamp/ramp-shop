@@ -1,9 +1,9 @@
-import lightModeLogo from '@/assets/images/logo-black.svg';
-import darkModeLogo from '@/assets/images/logo-white.svg';
+import RampLogo from '@/assets/images/Ramp-logo-black.svg';
+import RampDarkLogo from '@/assets/images/Ramp-logo.svg';
 
 export const siteSettings = {
-  lightLogo: lightModeLogo,
-  darkLogo: darkModeLogo,
-  width: 128,
-  height: 40,
+  lightLogo: RampLogo,
+  darkLogo: RampDarkLogo,
+  width: 268,
+  height: 120,
 };
