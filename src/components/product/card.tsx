@@ -93,7 +93,7 @@ export default function Card({ product }: { product: Product }) {
             title={name}
             className="mb-0.5 truncate font-medium text-dark-100 dark:text-light"
           >
-            <AnchorLink href={routes.contact}>{name}</AnchorLink>
+            <AnchorLink href={routes.product(product.id)}>{name}</AnchorLink>
           </h3>
           {/* <AnchorLink
             href={routes.shopUrl(shop?.slug)}
