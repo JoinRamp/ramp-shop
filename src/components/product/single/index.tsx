@@ -49,6 +49,8 @@ const Single: React.FC<SingleProps> = ({ product }) => {
     type,
   } = product;
   const previews = getPreviews(gallery, image);
+
+  console.log('heryyy', product, previews);
   return (
     <div className="relative">
       <div className="h-full min-h-screen p-4 md:px-6 lg:px-8 lg:pt-6">
@@ -101,7 +103,7 @@ const Single: React.FC<SingleProps> = ({ product }) => {
                 tags={tags}
                 created_at={created_at}
                 updated_at={updated_at}
-                layoutType={type.name}
+                layoutType={type?.name ?? 'new'}
                 //@ts-ignore
                 icon={type?.icon}
                 className="flex-shrink-0 pb-6 pt-2.5 lg:min-w-[350px] lg:max-w-[470px] lg:pb-0"
