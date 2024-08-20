@@ -13,16 +13,16 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const HelpPage: NextPageWithLayout = () => {
   const { t } = useTranslation('common');
-  const { faqs, isLoading, error, loadMore, hasNextPage, isLoadingMore } =
-    useFAQs({
-      faq_type: 'global',
-      issued_by: 'Super Admin',
-      limit: 10,
-      orderBy: 'created_at',
-      sortedBy: 'DESC',
-    });
+  // const { faqs, isLoading, error, loadMore, hasNextPage, isLoadingMore } =
+  //   useFAQs({
+  //     faq_type: 'global',
+  //     issued_by: 'Super Admin',
+  //     limit: 10,
+  //     orderBy: 'created_at',
+  //     sortedBy: 'DESC',
+  //   });
 
-  if (error) return <ErrorMessage message={error?.message} />;
+  // if (error) return <ErrorMessage message={error?.message} />;
 
   return (
     <>
@@ -37,13 +37,13 @@ const HelpPage: NextPageWithLayout = () => {
           subtitle={t('text-help-page-subtitle')}
         />
         <GeneralContainer>
-          <Help
+          {/* <Help
             faqs={faqs}
             hasMore={Boolean(hasNextPage)}
             isLoading={isLoading}
             isLoadingMore={isLoadingMore}
             loadMore={loadMore}
-          />
+          /> */}
         </GeneralContainer>
       </div>
     </>

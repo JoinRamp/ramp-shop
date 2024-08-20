@@ -27,6 +27,8 @@ import { useMutation } from 'react-query';
 import { createOrderFn } from '@/services/products';
 import toast from 'react-hot-toast';
 import { getErrorMessage } from '@/utils/helpers';
+import ReactConfetti from 'react-confetti';
+import { useWindowSize } from 'react-use';
 
 type SingleProps = {
   products: Product[];
@@ -52,6 +54,7 @@ const Single: React.FC<SingleProps> = ({ products }) => {
     customer_address: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const { width, height } = useWindowSize();
   // const previews = getPreviews(gallery, image);
 
   // console.log('heryyy', products);
@@ -287,9 +290,33 @@ const Single: React.FC<SingleProps> = ({ products }) => {
         ) : null}
 
         {isSubmitted ? (
-          <p className="text-green-500 font-semibold w-full text-center">
-            Order Created Successfully!
-          </p>
+          // <p className="text-green-500 font-semibold w-full text-center">
+          //   Order Created Successfully!
+          // </p>
+          <div className="m-auto flex flex-grow flex-col items-center justify-center px-5">
+            <div className="mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-light shadow-card dark:bg-dark-400 md:h-[120px] md:w-[120px] 3xl:h-32 3xl:w-32">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-12 w-12 text-brand-dark md:h-16 md:w-16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            </div>
+            <h2 className="mb-2.5 text-15px font-semibold text-dark-300 dark:text-light md:text-base 3xl:text-lg">
+              {t('text-order-received-title')}
+            </h2>
+            <p className="text-center">{t('text-order-thank-you-message')}</p>
+
+            <ReactConfetti width={width} height={height} />
+          </div>
         ) : null}
       </div>
       {/* <motion.div

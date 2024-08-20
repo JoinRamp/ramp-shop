@@ -16,31 +16,31 @@ import { useMemo } from 'react';
 
 const TermsPage: NextPageWithLayout = () => {
   const { t } = useTranslation('common');
-  const {
-    termsAndConditions,
-    isLoading,
-    error,
-    loadMore,
-    hasMore,
-    isLoadingMore,
-  } = useTermsAndConditions({
-    type: 'global',
-    issued_by: 'Super Admin',
-    limit: 10,
-    is_approved: true,
-    orderBy: 'created_at',
-    sortedBy: 'DESC',
-  });
+  // const {
+  //   termsAndConditions,
+  //   isLoading,
+  //   error,
+  //   loadMore,
+  //   hasMore,
+  //   isLoadingMore,
+  // } = useTermsAndConditions({
+  //   type: 'global',
+  //   issued_by: 'Super Admin',
+  //   limit: 10,
+  //   is_approved: true,
+  //   orderBy: 'created_at',
+  //   sortedBy: 'DESC',
+  // });
 
-  const getLastUpdateTermsDate = useMemo(() => {
-    return (
-      !isEmpty(termsAndConditions) &&
-      isArray(termsAndConditions) &&
-      termsAndConditions[0]?.created_at
-    );
-  }, [termsAndConditions]);
+  // const getLastUpdateTermsDate = useMemo(() => {
+  //   return (
+  //     !isEmpty(termsAndConditions) &&
+  //     isArray(termsAndConditions) &&
+  //     termsAndConditions[0]?.created_at
+  //   );
+  // }, [termsAndConditions]);
 
-  if (error) return <ErrorMessage message={error?.message} />;
+  // if (error) return <ErrorMessage message={error?.message} />;
 
   return (
     <>
@@ -49,7 +49,7 @@ const TermsPage: NextPageWithLayout = () => {
         description="Fastest digital download template built with React, NextJS, TypeScript, React-Query and Tailwind CSS."
         url={routes.terms}
       />
-      <div className="mx-auto flex h-full w-full max-w-screen-xl flex-col p-4 sm:p-5">
+      {/* <div className="mx-auto flex h-full w-full max-w-screen-xl flex-col p-4 sm:p-5">
         {!isEmpty(termsAndConditions) ? (
           <PageHeading
             title={t('text-terms-page-title')}
@@ -73,7 +73,8 @@ const TermsPage: NextPageWithLayout = () => {
             terms={termsAndConditions}
           />
         </GeneralContainer>
-      </div>
+      </div> */}
+      temp
     </>
   );
 };
