@@ -419,6 +419,7 @@ export interface RatingCount {
 
 export interface Product {
   id: string;
+  uid: string;
   name: string;
   slug: string;
   description: string;
@@ -426,7 +427,7 @@ export interface Product {
   sale_price: number;
   orders_count: number;
   total_downloads: number;
-  image: Attachment;
+  image: Attachment | string;
   gallery: Attachment[];
   shop: Shop;
   created_at: string;

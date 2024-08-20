@@ -92,12 +92,12 @@ export function Sidebar({
               isCollapse={isCollapse}
               icon={<HomeIcon className="h-[18px] w-[18px] text-current" />}
             />
-            <NavLink
+            {/* <NavLink
               title={t('text-explore')}
               href={routes.explore}
               isCollapse={isCollapse}
               icon={<DiscoverIcon className="h-[18px] w-[18px] text-current" />}
-            />
+            /> */}
             <NavLink
               title={t('text-popular-products')}
               href={routes.popularProducts}

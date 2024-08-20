@@ -15,36 +15,37 @@ import { fadeInBottomWithScaleX } from '@/lib/framer-motion/fade-in-bottom';
 import { isFree } from '@/lib/is-free';
 import { useTranslation } from 'next-i18next';
 import { ExternalIcon } from '@/components/icons/external-icon';
+import { ProductType } from '@/types/product';
 
-export default function Card({ product }: { product: Product }) {
-  const { name, slug, image, shop, is_external } = product ?? {};
+export default function Card({ product }: { product: ProductType }) {
+  const { name, slug, image, shop } = product ?? {};
   const { openModal } = useModalAction();
   const { isGridCompact } = useGridSwitcher();
   const { price, basePrice } = usePrice({
-    amount: product.sale_price ? product.sale_price : product.price,
+    amount: product.selling_price ? product.selling_price : product.price,
     baseAmount: product.price,
   });
   const goToContactUsPage = (
     e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>,
   ) => {
     e.stopPropagation();
-    Router.push('contact-us');
+    Router.push(`/products/${product.shop?.uid ?? 2}`);
   };
   const { t } = useTranslation('common');
-  const isFreeItem = isFree(product?.sale_price ?? product?.price);
+  const isFreeItem = isFree(product?.selling_price ?? product?.price);
   return (
     <motion.div variants={fadeInBottomWithScaleX()} title={name}>
       <div className="group relative flex aspect-[3/2] w-full justify-center overflow-hidden">
-        {is_external ? (
+        {/* {is_external ? (
           <div className="absolute right-2 top-2 z-10 rounded-md bg-dark-300/70 px-2 py-2 text-white">
             <ExternalIcon className="h-5 w-5" />
           </div>
-        ) : null}
+        ) : null} */}
         <Image
           alt={name}
           fill
           quality={100}
-          src={image?.thumbnail ?? placeholder}
+          src={image ?? placeholder}
           className="bg-light-500 object-cover dark:bg-dark-400"
           sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
@@ -81,7 +82,7 @@ export default function Card({ product }: { product: Product }) {
             alt={shop?.name}
             quality={100}
             fill
-            src={shop?.logo?.thumbnail ?? placeholder}
+            src={shop?.logo ?? placeholder}
             className="rounded-full bg-light-500 object-cover dark:bg-dark-400"
             sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
@@ -93,7 +94,7 @@ export default function Card({ product }: { product: Product }) {
             title={name}
             className="mb-0.5 truncate font-medium text-dark-100 dark:text-light"
           >
-            <AnchorLink href={routes.product(product.id)}>{name}</AnchorLink>
+            <AnchorLink href={routes.product(product.uid)}>{name}</AnchorLink>
           </h3>
           {/* <AnchorLink
             href={routes.shopUrl(shop?.slug)}

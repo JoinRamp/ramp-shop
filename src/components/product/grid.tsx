@@ -9,9 +9,10 @@ import ItemNotFound from '@/components/ui/item-not-found';
 import rangeMap from '@/lib/range-map';
 import { staggerTransition } from '@/lib/framer-motion/stagger-transition';
 import { useTranslation } from 'next-i18next';
+import { ProductType } from '@/types/product';
 
 interface GridProps {
-  products: Product[];
+  products: ProductType[];
   onLoadMore?: () => void;
   hasNextPage?: boolean;
   isLoadingMore?: boolean;
