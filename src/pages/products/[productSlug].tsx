@@ -1,4 +1,6 @@
 import Single from '@/components/product/single';
+import ItemNotFound from '@/components/ui/item-not-found';
+import { PageLoader } from '@/components/ui/loader/spinner/spinner';
 // import { getStaticPaths, getStaticProps } from '@/data/ssr/products.ssr';
 import Layout from '@/layouts/_layout';
 import { getProductDetailFn } from '@/services/products';
@@ -23,6 +25,20 @@ const ProductPage = () => {
     }
     return [];
   }, [productQuery.isLoading, productQuery.data]);
+
+  if (productQuery.isLoading) {
+    return (
+      <div className="py-32">
+        <PageLoader />
+      </div>
+    );
+  }
+
+  if (productQuery.isError && !productQuery.isLoading) {
+    <div className="py-32">
+      <ItemNotFound title="No help found 😔" message="" />
+    </div>;
+  }
 
   return <Single products={products} />;
 };

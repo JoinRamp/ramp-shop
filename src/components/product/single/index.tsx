@@ -19,7 +19,7 @@ import {
 } from '@/lib/framer-motion/fade-in-bottom';
 import { Product } from '@/types';
 import { isEmpty } from 'lodash';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import classNames from 'classnames';
 import Input from '@/components/ui/forms/input';
 import Button from '@/components/ui/button';
@@ -55,6 +55,8 @@ const Single: React.FC<SingleProps> = ({ products }) => {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { width, height } = useWindowSize();
+  const timer = useRef<any>(null);
+  const [showConfetti, setShowConfetti] = useState(false);
   // const previews = getPreviews(gallery, image);
 
   // console.log('heryyy', products);
@@ -68,11 +70,24 @@ const Single: React.FC<SingleProps> = ({ products }) => {
     onSuccess: () => {
       toast.success('Successful');
       setIsSubmitted(true);
+      setShowConfetti(true);
     },
     onError: (err) => {
       toast.error(getErrorMessage(err));
     },
   });
+
+  useEffect(() => {
+    if (showConfetti) {
+      timer.current = setTimeout(() => {
+        setShowConfetti(false);
+      }, 8000);
+    }
+
+    return () => {
+      clearTimeout(timer.current);
+    };
+  }, [showConfetti]);
 
   return (
     <div className="relative">
@@ -91,7 +106,7 @@ const Single: React.FC<SingleProps> = ({ products }) => {
 
         <p className="font-medium text-lg">Select one:</p>
 
-        <div className="mt-4 mb-8">
+        <div className="mt-4 mb-10">
           <motion.div
             variants={staggerTransition()}
             className=" grid gap-4 sm:grid-cols-3 lg:gap-6"
@@ -313,9 +328,20 @@ const Single: React.FC<SingleProps> = ({ products }) => {
             <h2 className="mb-2.5 text-15px font-semibold text-dark-300 dark:text-light md:text-base 3xl:text-lg">
               {t('text-order-received-title')}
             </h2>
-            <p className="text-center">{t('text-order-thank-you-message')}</p>
+            <p className="text-center">{t('Return home')}</p>
 
-            <ReactConfetti width={width} height={height} />
+            <Button
+              className="my-6 w-40"
+              onClick={() => {
+                router.push('/');
+              }}
+            >
+              Home
+            </Button>
+
+            {showConfetti ? (
+              <ReactConfetti width={width} height={height} />
+            ) : null}
           </div>
         ) : null}
       </div>
