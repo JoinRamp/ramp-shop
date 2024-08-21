@@ -14,10 +14,10 @@ const menuItems = [
     label: 'text-help-page-title',
     path: routes.help,
   },
-  {
-    label: 'text-license-agreement',
-    path: routes.licensing,
-  },
+  // {
+  //   label: 'text-license-agreement',
+  //   path: routes.licensing,
+  // },
   {
     label: 'text-terms-and-conditions',
     path: routes.terms,

@@ -122,9 +122,10 @@ const Single: React.FC<SingleProps> = ({ products }) => {
                 }}
                 variants={fadeInBottomWithScaleX()}
                 className={classNames(
-                  'relative aspect-[3/2] border-2 border-transparent hover:border-pink-200 mb-10 transition duration-300 group',
+                  'relative aspect-[3/2] border-2 hover:border-pink-200 mb-10 transition duration-300 group',
                   {
-                    ' border-pink-200': selectedItem === p.uid,
+                    '!border-pink-200': selectedItem === p.uid,
+                    'border-transparent': selectedItem !== p.uid,
                   },
                 )}
               >
@@ -203,7 +204,7 @@ const Single: React.FC<SingleProps> = ({ products }) => {
                 });
               }}
             >
-              <div className="w-full max-w-4xl mx-auto p-10 rounded-md border border-slate-300/20">
+              <div className="w-full max-w-4xl mx-auto px-10 py-14 rounded-md  md:bg-light md:px-10 md:shadow-card md:dark:bg-dark-200 md:dark:shadow-none">
                 <h3 className="mb-5 text-xl font-bold">Place Order Form</h3>
                 <div className="w-full mb-6 grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-6">
                   <Input
@@ -292,7 +293,7 @@ const Single: React.FC<SingleProps> = ({ products }) => {
                 <div>
                   <Button
                     type="submit"
-                    className="px-12"
+                    className="w-40"
                     isLoading={orderMutation.isLoading}
                     disabled={orderMutation.isLoading}
                   >

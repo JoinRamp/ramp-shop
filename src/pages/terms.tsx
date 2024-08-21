@@ -49,32 +49,68 @@ const TermsPage: NextPageWithLayout = () => {
         description="Fastest digital download template built with React, NextJS, TypeScript, React-Query and Tailwind CSS."
         url={routes.terms}
       />
-      {/* <div className="mx-auto flex h-full w-full max-w-screen-xl flex-col p-4 sm:p-5">
-        {!isEmpty(termsAndConditions) ? (
-          <PageHeading
-            title={t('text-terms-page-title')}
-            subtitle={`Last updated on ${
-              getLastUpdateTermsDate
-                ? dayjs(new Date(getLastUpdateTermsDate as string)).format(
-                    'MMMM D, YYYY'
-                  )
-                : ''
-            }`}
-          />
-        ) : (
-          ''
-        )}
+      <div className="mx-auto flex h-full w-full max-w-screen-xl flex-col p-4 sm:p-5">
+        <PageHeading
+          title={t('text-terms-page-title')}
+          subtitle={`Last updated on September 29, 2023`}
+        />
         <GeneralContainer>
-          <TermsAndCondition
+          {/* <TermsAndCondition
             hasMore={hasMore}
             isLoading={isLoading}
             isLoadingMore={isLoadingMore}
             loadMore={loadMore}
             terms={termsAndConditions}
-          />
+          /> */}
+          <div className="order-list-enable mb-8 last:mb-0 lg:mb-10">
+            <h3 className="mb-4 text-sm font-medium text-dark dark:text-light lg:mb-5">
+              {t('Disclaimers and Limitation of Liability')}
+            </h3>
+            <div className="space-y-5 leading-6">
+              {`The Website is provided "as is" and "as available" without any
+              warranties, either expressed or implied. Pickbazar shall not be
+              liable for any direct, indirect, incidental, special,
+              consequential, or punitive damages resulting from the use or
+              inability to use the Website.`}
+            </div>
+          </div>
+          <div className="order-list-enable mb-8 last:mb-0 lg:mb-10">
+            <h3 className="mb-4 text-sm font-medium text-dark dark:text-light lg:mb-5">
+              {t('Intellectual Property')}
+            </h3>
+            <div className="space-y-5 leading-6">
+              {`The Website and its original content, features, and functionality are owned by [Your Company] and are protected by international copyright, trademark, and other intellectual property laws.`}
+            </div>
+          </div>
+
+          <div className="order-list-enable mb-8 last:mb-0 lg:mb-10">
+            <h3 className="mb-4 text-sm font-medium text-dark dark:text-light lg:mb-5">
+              {t('Privacy Policy')}
+            </h3>
+            <div className="space-y-5 leading-6">
+              {`Your use of the Website is also governed by our Privacy Policy, which can be found [link to Privacy Policy]. By using the Website, you consent to the practices described in the Privacy Policy.`}
+            </div>
+          </div>
+
+          <div className="order-list-enable mb-8 last:mb-0 lg:mb-10">
+            <h3 className="mb-4 text-sm font-medium text-dark dark:text-light lg:mb-5">
+              {t('Use of the Website')}
+            </h3>
+            <div className="space-y-5 leading-6">
+              {`You must be at least [Age] years old to use this Website. By using the Website, you represent and warrant that you are at least [Age] years old. You agree to use the Website for lawful purposes only and in a manner that does not infringe upon the rights of others.`}
+            </div>
+          </div>
+
+          <div className="order-list-enable mb-8 last:mb-0 lg:mb-10">
+            <h3 className="mb-4 text-sm font-medium text-dark dark:text-light lg:mb-5">
+              {t('Acceptance of Terms')}
+            </h3>
+            <div className="space-y-5 leading-6">
+              {`By using this Website, you agree to comply with and be bound by these terms and conditions. If you do not agree to these terms, please do not use the Website.`}
+            </div>
+          </div>
         </GeneralContainer>
-      </div> */}
-      temp
+      </div>
     </>
   );
 };

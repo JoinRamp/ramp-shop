@@ -25,20 +25,20 @@ const ContactUsPage: NextPageWithLayout = () => {
   const { settings } = useSettings();
   const { contactDetails } = settings ?? {};
   let [reset, setReset] = useState<CreateContactUsInput | null>(null);
-  // const { mutate, isLoading, isSuccess } = useContactUs();
-  // const onSubmit: SubmitHandler<CreateContactUsInput> = (values) => {
-  //   mutate(values);
-  // };
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     setReset({
-  //       name: '',
-  //       email: '',
-  //       subject: '',
-  //       description: '',
-  //     });
-  //   }
-  // }, [isSuccess]);
+  const { mutate, isLoading, isSuccess } = useContactUs();
+  const onSubmit: SubmitHandler<CreateContactUsInput> = (values) => {
+    mutate(values);
+  };
+  useEffect(() => {
+    if (isSuccess) {
+      setReset({
+        name: '',
+        email: '',
+        subject: '',
+        description: '',
+      });
+    }
+  }, [isSuccess]);
 
   return (
     <>
@@ -47,7 +47,7 @@ const ContactUsPage: NextPageWithLayout = () => {
         description="Fastest digital download template built with React, NextJS, TypeScript, React-Query and Tailwind CSS."
         url={routes.contact}
       />
-      {/* <div className="mx-auto flex h-full w-full max-w-screen-xl flex-col p-4 sm:p-5">
+      <div className="mx-auto flex h-full w-full max-w-screen-xl flex-col p-4 sm:p-5">
         <PageHeading
           title={t('contact-us-title')}
           subtitle={t('contact-us-subtitle')}
@@ -88,8 +88,7 @@ const ContactUsPage: NextPageWithLayout = () => {
             />
           </div>
         </div>
-      </div> */}
-      temp
+      </div>
     </>
   );
 };
