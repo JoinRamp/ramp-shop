@@ -7,19 +7,23 @@ import { getProductDetailFn } from '@/services/products';
 import type { NextPageWithLayout } from '@/types';
 import type { GetServerSideProps, InferGetStaticPropsType } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 // export { getStaticPaths, getStaticProps };
 
 const ProductPage = () => {
   const { query } = useRouter();
+  const searchParams = useSearchParams();
+  const [prd] = useState(searchParams.get('prd'));
 
   const shopDetailsQuery = useQuery(
     ['get_shop_details', query.productSlug],
     () => {
       return getProductDetailFn(query.productSlug as string);
     },
+    { enabled: !prd },
   );
 
   const shopDetails = useMemo(() => {
@@ -43,7 +47,7 @@ const ProductPage = () => {
     </div>;
   }
 
-  return <Single products={shopDetails} />;
+  return <Single products={shopDetails} prd={prd} />;
 };
 
 ProductPage.getLayout = function getLayout(page: any) {

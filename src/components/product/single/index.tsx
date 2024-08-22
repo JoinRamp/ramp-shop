@@ -31,9 +31,11 @@ import ReactConfetti from 'react-confetti';
 import { useWindowSize } from 'react-use';
 import { ExternalIcon } from '@/components/icons/external-icon';
 import Badge from '@/components/ui/badge';
+import { useSearchParams } from 'next/navigation';
 
 type SingleProps = {
   products: Product[];
+  prd?: string | null;
 };
 
 // export function getPreviews(gallery: any[], image: any) {
@@ -42,7 +44,7 @@ type SingleProps = {
 //   return [{}, {}];
 // }
 
-const Single: React.FC<SingleProps> = ({ products }) => {
+const Single: React.FC<SingleProps> = ({ products, prd }) => {
   const { t } = useTranslation('common');
   const router = useRouter();
   const [selectedItem, setSelectedItem] = useState('');
@@ -69,17 +71,14 @@ const Single: React.FC<SingleProps> = ({ products }) => {
     return null;
   }, [products]);
 
-  const price = useMemo(() => {
-    const currPrice = selectedItem
-      ? products?.find((x) => x.uid === selectedItem)?.price
-      : products[0].price;
+  const formatPrice = (p: number) => {
     const amt = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
-    }).format(currPrice ?? 0);
+    }).format(p ?? 0);
 
     return amt;
-  }, [products]);
+  };
 
   const orderMutation = useMutation({
     mutationFn: createOrderFn,
@@ -120,128 +119,103 @@ const Single: React.FC<SingleProps> = ({ products }) => {
               </button>
             </div>
 
-            <div className="mb-6 flex flex-wrap gap-4 justify-between items-center">
-              <div className="flex gap-2 items-center justify-start">
-                <h2 className="text-xl md:text-2xl font-semibold tracking-tighter text-white capitalize">
-                  {shop?.name ?? ''}
-                </h2>
-                <div className="flex flex-shrink-0 flex-col items-end pl-2.5">
-                  <span className="rounded-2xl bg-light-500 px-2.5 py-0.5 text-base font-semibold uppercase text-brand dark:bg-dark-300 dark:text-brand-dark">
-                    {price}
-                  </span>
+            {!prd ? (
+              <>
+                <div className="mb-6 flex flex-wrap gap-4 justify-between items-center">
+                  <div className="flex gap-2 items-center justify-start">
+                    <h2 className="text-xl md:text-2xl font-semibold tracking-tighter capitalize">
+                      {shop?.name ?? ''}
+                    </h2>
+                  </div>
+
+                  {shop?.shop_website_link ? (
+                    <a href={shop.shop_website_link} target="_blank">
+                      <Button variant="outline" className="gap-2">
+                        View More <ExternalIcon width={18} />
+                      </Button>
+                    </a>
+                  ) : null}
                 </div>
-              </div>
 
-              {shop?.shop_website_link ? (
-                <a href={shop.shop_website_link} target="_blank">
-                  <Button variant="outline" className="gap-2">
-                    View More <ExternalIcon width={18} />
-                  </Button>
-                </a>
-              ) : null}
-            </div>
+                <div className="p-5 border border-slate-500/20 rounded-lg">
+                  <h2 className="font-medium text-base mb-5">
+                    Select a product:
+                  </h2>
 
-            <div className="p-5 border border-slate-500/20 rounded-lg">
-              <h2 className="font-medium text-base mb-5">Select a product:</h2>
-
-              <div className="mb-10">
-                <motion.div
-                  variants={staggerTransition()}
-                  className=" grid gap-4 sm:grid-cols-3 lg:gap-6"
-                >
-                  {products?.map((p, idx) => (
+                  <div className="mb-10">
                     <motion.div
-                      key={idx}
-                      role={'button'}
-                      tabIndex={0}
-                      onClick={() => {
-                        setSelectedItem(p.uid);
-                        setIsSubmitted(false);
-                      }}
-                      variants={fadeInBottomWithScaleX()}
-                      className={classNames(
-                        'bg-dark-200 rounded-lg group border-2 hover:border-brand  transition duration-300 ',
-                        {
-                          '!border-brand': selectedItem === p.uid,
-                          'border-transparent': selectedItem !== p.uid,
-                        },
-                      )}
+                      variants={staggerTransition()}
+                      className=" grid gap-4 sm:grid-cols-3 lg:gap-6"
                     >
-                      <div className="p-3">
-                        <div className="relative aspect-[3/2] mb-3">
-                          <Image
-                            alt={p.name}
-                            fill
-                            quality={100}
-                            src={(p.image as string) ?? placeholder}
-                            className="object-cover bg-light-500 dark:bg-dark-300"
-                          />
-                        </div>
-
-                        <h4
+                      {products?.map((p, idx) => (
+                        <motion.div
+                          key={idx}
+                          role={'button'}
+                          tabIndex={0}
+                          onClick={() => {
+                            setSelectedItem(p.uid);
+                            setIsSubmitted(false);
+                          }}
+                          variants={fadeInBottomWithScaleX()}
                           className={classNames(
-                            ' group-hover:text-brand transition duration-300 z-10 capitalize font-semibold text-center',
+                            'dark:bg-dark-200 rounded-lg group border-2 hover:border-brand  transition duration-300 ',
                             {
-                              'text-brand': selectedItem === p.uid,
+                              '!border-brand': selectedItem === p.uid,
+                              'border-transparent': selectedItem !== p.uid,
                             },
                           )}
                         >
-                          {p.name}
-                        </h4>
-                      </div>
-                    </motion.div>
-                  ))}
-                </motion.div>
-              </div>
-            </div>
+                          <div className="p-3">
+                            <div className="relative aspect-[3/2] mb-3">
+                              <Image
+                                alt={p.name}
+                                fill
+                                quality={100}
+                                src={(p.image as string) ?? placeholder}
+                                className="object-cover bg-light-500 dark:bg-dark-300"
+                              />
+                            </div>
 
-            {selectedItem ? (
+                            <div className="w-full flex justify-between items-center gap-3">
+                              <h4
+                                className={classNames(
+                                  ' group-hover:text-brand transition duration-300 z-10 capitalize font-semibold text-center',
+                                  {
+                                    'text-brand': selectedItem === p.uid,
+                                  },
+                                )}
+                              >
+                                {p.name}
+                              </h4>
+
+                              <div className="flex flex-shrink-0 flex-col items-end pl-2.5">
+                                <span className="rounded-2xl bg-light-500 px-2.5 py-0.5 text-13px font-semibold uppercase text-black dark:bg-dark-300 dark:text-brand-dark">
+                                  {formatPrice(p.price)}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                  </div>
+                </div>
+              </>
+            ) : null}
+
+            {selectedItem || prd ? (
               <motion.div
                 variants={fadeInBottom()}
                 className="justify-center py-6 lg:flex lg:flex-col lg:py-10"
               >
-                {/* <ProductDetailsPaper product={product[0]} className="lg:hidden" /> */}
-                {/* <div className="lg:mx-auto 3xl:max-w-[1200px]">
-            <div className="w-full rtl:space-x-reverse lg:flex lg:space-x-14 lg:pb-3 xl:space-x-20 3xl:space-x-28">
-              <div className="hidden lg:block 3xl:max-w-[600px]">
-                <div className="pb-5 leading-[1.9em] dark:text-light-600">
-                  {description}
-                </div>
-                <ProductSocialShare
-                  productSlug={slug}
-                  className="pt-5 border-t border-light-500 dark:border-dark-400 md:pt-7"
-                />
-              </div>
-              <ProductInformation
-                tags={tags}
-                created_at={created_at}
-                updated_at={updated_at}
-                layoutType={type?.name ?? 'new'}
-                //@ts-ignore
-                icon={type?.icon}
-                className="flex-shrink-0 pb-6 pt-2.5 lg:min-w-[350px] lg:max-w-[470px] lg:pb-0"
-              />
-            </div>
-            <div className="w-full mt-4 md:mt-8 md:space-y-10 lg:mt-12 lg:flex lg:flex-col lg:space-y-12">
-              <AverageRatings
-                ratingCount={rating_count}
-                totalReviews={total_reviews}
-                ratings={ratings}
-              />
-              <ProductReviews productId={id} />
-              <ProductQuestions
-                productId={product?.id}
-                shopId={product?.shop?.id}
-              />
-            </div>
-          </div> */}
-
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
 
                     orderMutation.mutate({
-                      product_uid: selectedItem,
+                      product_uid: prd
+                        ? (router.query.productSlug! as string)
+                        : selectedItem,
                       ...vals,
                     });
                   }}
@@ -252,7 +226,9 @@ const Single: React.FC<SingleProps> = ({ products }) => {
                       <Input
                         label="Selected Product"
                         defaultValue={
-                          products.find((p) => p.uid === selectedItem)?.name
+                          prd
+                            ? atob(prd)
+                            : products.find((p) => p.uid === selectedItem)?.name
                         }
                         disabled
                       />

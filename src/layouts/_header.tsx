@@ -37,7 +37,7 @@ export default function Header({
   const { t } = useTranslation('common');
   const { width } = useWindowSize();
   const [underMaintenanceIsComing] = useAtom(checkIsMaintenanceModeComing);
-  const { settings } = useSettings();
+  // const { settings } = useSettings();
   useSwapBodyClassOnScrollDirection();
   const [isScrolling] = useAtom(checkIsScrollingStart);
   return (
@@ -49,10 +49,10 @@ export default function Header({
           className="sticky top-0 left-0 z-50 rounded-none"
           childClassName="flex justify-center items-center w-full gap-4"
         >
-          <CountdownTimer
+          {/* <CountdownTimer
             date={new Date(settings?.maintenance?.start as string)}
             className="text-blue-600 [&>p]:bg-blue-200 [&>p]:p-2 [&>p]:text-xs [&>p]:text-blue-600"
-          />
+          /> */}
         </Alert>
       ) : (
         ''
@@ -66,6 +66,7 @@ export default function Header({
               className="hidden sm:flex"
             />
           )}
+
           <Logo />
         </div>
         <div className="relative flex items-center gap-5 pr-0.5 xs:gap-6 sm:gap-7">

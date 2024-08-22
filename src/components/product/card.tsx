@@ -32,7 +32,9 @@ export default function Card({
     Router.push(
       isShop
         ? `/products/${(product as ShopType).uid}`
-        : `/products/${(product as ProductType).shop?.uid ?? 2}`,
+        : `/products/${(product as ProductType).uid ?? 2}?prd=${btoa(
+            product.name,
+          )}`,
     );
   };
 
@@ -89,7 +91,7 @@ export default function Card({
                 className={cn(isGridCompact ? 'h-4 w-4' : 'h-5 w-5')}
               />
             </div>
-            {'Become A Reseller'}
+            {isShop ? 'Enter Store' : 'Buy Product'}
           </button>
         </div>
       </div>
@@ -136,7 +138,7 @@ export default function Card({
         <div
           className={cn({
             '-mt-[4px] flex flex-col truncate ml-24': isShop,
-            '-mt-[1px] flex flex-col truncate ltr:mr-auto ltr:pl-2.5 rtl:ml-auto rtl:pr-2.5 rtl:text-right':
+            '-mt-[1px] flex items-center truncate ltr:mr-auto ltr:pl-2.5 rtl:ml-auto rtl:pr-2.5 rtl:text-right w-full':
               !isShop,
           })}
         >
@@ -148,6 +150,17 @@ export default function Card({
               {product.name}
             </AnchorLink>
           </h3>
+
+          {!isShop ? (
+            <div className="ml-auto flex flex-shrink-0 flex-col items-end pl-2.5">
+              <span className="rounded-2xl bg-light-500 px-1.5 py-0.5 text-13px font-semibold uppercase text-brand dark:bg-dark-300 dark:text-brand-dark">
+                {new Intl.NumberFormat('en-US', {
+                  style: 'currency',
+                  currency: 'USD',
+                }).format((product as ProductType).price ?? 0)}
+              </span>
+            </div>
+          ) : null}
           {/* <AnchorLink
             href={routes.shopUrl(shop?.slug)}
             className="font-medium text-light-base hover:text-brand dark:text-dark-800 dark:hover:text-brand"
