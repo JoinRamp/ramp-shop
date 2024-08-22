@@ -127,18 +127,10 @@ const Single: React.FC<SingleProps> = ({ products, prd }) => {
                       {shop?.name ?? ''}
                     </h2>
                   </div>
-
-                  {shop?.shop_website_link ? (
-                    <a href={shop.shop_website_link} target="_blank">
-                      <Button variant="outline" className="gap-2">
-                        View More <ExternalIcon width={18} />
-                      </Button>
-                    </a>
-                  ) : null}
                 </div>
 
-                <div className="p-5 border border-slate-500/20 rounded-lg">
-                  <h2 className="font-medium text-base mb-5">
+                <div className="p-5 pt-7 border border-slate-500/20 rounded-lg">
+                  <h2 className="font-medium text-base mb-7">
                     Select a product:
                   </h2>
 
@@ -199,6 +191,16 @@ const Single: React.FC<SingleProps> = ({ products, prd }) => {
                       ))}
                     </motion.div>
                   </div>
+
+                  {shop?.shop_website_link ? (
+                    <div className="flex justify-center items-center">
+                      <a href={shop.shop_website_link} target="_blank">
+                        <Button className="gap-2 !px-20">
+                          View More <ExternalIcon width={18} />
+                        </Button>
+                      </a>
+                    </div>
+                  ) : null}
                 </div>
               </>
             ) : null}

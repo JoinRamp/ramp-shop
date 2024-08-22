@@ -12,67 +12,92 @@ const PrivacyPage: NextPageWithLayout = () => {
   const { t } = useTranslation('common');
   return (
     <>
-      <Seo
-        title="Privacy Policy"
-        description="Fastest digital download template built with React, NextJS, TypeScript, React-Query and Tailwind CSS."
-        url={routes.privacy}
-      />
+      <Seo title="Privacy Policy" description="--" url={routes.privacy} />
       <div className="mx-auto flex h-full w-full max-w-screen-xl flex-col p-4 sm:p-5">
         <PageHeading
           title={t('text-privacy-page-title')}
-          subtitle={t('text-privacy-page-subtitle')}
+          // subtitle={t('text-privacy-page-subtitle')}
         />
         <GeneralContainer>
           <div className="order-list-enable mb-8 last:mb-0 lg:mb-10">
             <h3 className="mb-4 text-sm font-medium text-dark dark:text-light lg:mb-5">
-              {t('Personal Information')}
+              {t('Introduction')}
             </h3>
             <div className="space-y-5 leading-6">
-              {`"Ramp" is a trademark of Ramp Private Limited ("Company"), a company incorporated under the Companies Act, 2013 with its registered and corporate office at Plot 64H, Sector 18, Gudgeon 122001 in the course of its business. The domain name grocers.com is owned by the Company.
-
-If you are a California resident, the information below also applies to you. Certain terms used in this section have the meanings given to them in the California Consumer Privacy Act of 2018 ("CCPA").`}
+              {`At Ramp, we respect your privacy and are committed to protecting your personal data. This Privacy Policy outlines how we collect, use, and safeguard your information when you use our platform.
+`}
             </div>
           </div>
 
           <div className="order-list-enable mb-8 last:mb-0 lg:mb-10">
             <h3 className="mb-4 text-sm font-medium text-dark dark:text-light lg:mb-5">
-              {t('Snap')}
+              {t('Information We Collect')}
             </h3>
             <div className="space-y-5 leading-6">
-              {`Customer are advised to read and understand our Privacy Policy carefully, as by accessing the website/app you agree to be bound by the terms and conditions of the Privacy Policy and consent to the collection, storage and use of information relating to you as provided herein.
-
-If you do not agree with the terms and conditions of our Privacy Policy, including in relation to the manner of collection or use of your information, please do not use or access the website/app.
-
-Our Privacy Policy is incorporated into the Terms and Conditions of Use of the website/app, and is subject to change from time to time without notice. It is strongly recommended that you periodically review our Privacy Policy as posted on the App/Web.`}
+              {`We may collect personal information that you provide directly to us, such as your name, email address, phone number, and payment details. We also collect information automatically when you use our platform, such as your IP address, browser type, and usage data.`}
             </div>
           </div>
 
           <div className="order-list-enable mb-8 last:mb-0 lg:mb-10">
             <h3 className="mb-4 text-sm font-medium text-dark dark:text-light lg:mb-5">
-              {t('Other Information')}
+              {t('How We Use Your Information')}
             </h3>
             <div className="space-y-5 leading-6">
-              {`We may automatically track certain information about you based upon your behavior on the website. We use this information to do internal research on our users’ demographics, interests, and behavior to better understand, protect and serve our users. This information is compiled and analyzed on an aggregated basis. This information may include the URL that you just came from (whether this URL is on the website or not), which URL you next go to (whether this URL is on the website or not), your computer browser information, your IP address, and other information associated with your interaction with the website. We may also share your Mobile IP/Device IP with third party(ies) and to the best of our knowledge, be-life and representations given to us by these third party(ies) this information is not stored.`}
+              {`We use your information to provide and improve our services, process transactions, communicate with you, and comply with legal obligations. Your information helps us ensure a smooth and secure experience on Ramp.`}
             </div>
           </div>
 
           <div className="order-list-enable mb-8 last:mb-0 lg:mb-10">
             <h3 className="mb-4 text-sm font-medium text-dark dark:text-light lg:mb-5">
-              {t('Third Party Advertisers')}
+              {t('Sharing Your Information')}
             </h3>
             <div className="space-y-5 leading-6">
-              {`To protect against the loss, misuse and alteration of the information under its control, the Company has in place appropriate physical, electronic and managerial procedures. For example, the Company servers are accessible only to authorized personnel and your information is shared with employees and authorized personnel on a need to know basis to complete the transaction and to provide the services requested by you. Although the Company endeavour to safeguard the confidentiality of your personally identifiable information, transmissions made by means of the Internet cannot be made absolutely secure. By using the website, you agree that the Company will have no liability for disclosure of your information due to errors in transmission and/or unauthorized acts of third parties.`}
+              {`We do not sell, trade, or rent your personal information to third parties. However, we may share your information with trusted partners who assist us in operating our platform, conducting our business, or serving you, as long as those parties agree to keep this information confidential.`}
             </div>
           </div>
 
           <div className="order-list-enable mb-8 last:mb-0 lg:mb-10">
             <h3 className="mb-4 text-sm font-medium text-dark dark:text-light lg:mb-5">
-              {t('Protection of social security numbers')}
+              {t('Data Security')}
             </h3>
             <div className="space-y-5 leading-6">
-              {`Customer are advised to read and understand our Privacy Policy carefully, as by accessing the website/app you agree to be bound by the terms and conditions of the Privacy Policy and consent to the collection, storage and use of information relating to you as provided herein.
+              {`We implement a variety of security measures to maintain the safety of your personal information. However, please note that no method of transmission over the internet or method of electronic storage is 100% secure.`}
+            </div>
+          </div>
 
-If you do not agree with the terms and conditions of our Privacy Policy, including in relation to the manner of collection or use of your information, please do not use or access the website/app.`}
+          <div className="order-list-enable mb-8 last:mb-0 lg:mb-10">
+            <h3 className="mb-4 text-sm font-medium text-dark dark:text-light lg:mb-5">
+              {t('Your Rights')}
+            </h3>
+            <div className="space-y-5 leading-6">
+              {`You have the right to access, correct, or delete your personal information at any time. You may also object to or restrict our processing of your data in certain circumstances. To exercise these rights, please contact us through our website.`}
+            </div>
+          </div>
+
+          <div className="order-list-enable mb-8 last:mb-0 lg:mb-10">
+            <h3 className="mb-4 text-sm font-medium text-dark dark:text-light lg:mb-5">
+              {t('Cookies')}
+            </h3>
+            <div className="space-y-5 leading-6">
+              {`We use cookies to enhance your experience on Ramp. Cookies are small files that are stored on your device and help us remember your preferences and improve our services. You can choose to disable cookies through your browser settings, but this may affect your ability to use certain features of our platform.`}
+            </div>
+          </div>
+
+          <div className="order-list-enable mb-8 last:mb-0 lg:mb-10">
+            <h3 className="mb-4 text-sm font-medium text-dark dark:text-light lg:mb-5">
+              {t('Changes to the Privacy Policy')}
+            </h3>
+            <div className="space-y-5 leading-6">
+              {`We may update this Privacy Policy from time to time. We will notify you of any changes by posting the updated policy on our website. Your continued use of Ramp after any changes signifies your acceptance of the new policy.`}
+            </div>
+          </div>
+
+          <div className="order-list-enable mb-8 last:mb-0 lg:mb-10">
+            <h3 className="mb-4 text-sm font-medium text-dark dark:text-light lg:mb-5">
+              {t('Contact Information')}
+            </h3>
+            <div className="space-y-5 leading-6">
+              {`If you have any questions about our Privacy Policy, please contact us through our website's contact form.`}
             </div>
           </div>
         </GeneralContainer>
