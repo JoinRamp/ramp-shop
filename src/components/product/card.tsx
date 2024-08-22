@@ -15,37 +15,54 @@ import { fadeInBottomWithScaleX } from '@/lib/framer-motion/fade-in-bottom';
 import { isFree } from '@/lib/is-free';
 import { useTranslation } from 'next-i18next';
 import { ExternalIcon } from '@/components/icons/external-icon';
-import { ProductType } from '@/types/product';
+import { ProductType, ShopType } from '@/types/product';
 
-export default function Card({ product }: { product: ProductType }) {
-  const { name, slug, image, shop } = product ?? {};
-  const { openModal } = useModalAction();
+export default function Card({
+  product,
+  isShop,
+}: {
+  product: ProductType | ShopType;
+  isShop?: boolean;
+}) {
   const { isGridCompact } = useGridSwitcher();
-  const { price, basePrice } = usePrice({
-    amount: product.selling_price ? product.selling_price : product.price,
-    baseAmount: product.price,
-  });
   const goToContactUsPage = (
     e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>,
   ) => {
     e.stopPropagation();
-    Router.push(`/products/${product.shop?.uid ?? 2}`);
+    Router.push(
+      isShop
+        ? `/products/${(product as ShopType).uid}`
+        : `/products/${(product as ProductType).shop?.uid ?? 2}`,
+    );
   };
+
   const { t } = useTranslation('common');
-  const isFreeItem = isFree(product?.selling_price ?? product?.price);
+
   return (
-    <motion.div variants={fadeInBottomWithScaleX()} title={name}>
-      <div className="group relative flex aspect-[3/2] w-full justify-center overflow-hidden">
+    <motion.div variants={fadeInBottomWithScaleX()} title={product.name}>
+      <div
+        className={cn(
+          'group relative flex  w-full justify-center overflow-hidden',
+          {
+            'aspect-[3/2]': !isShop,
+            'aspect-video': isShop,
+          },
+        )}
+      >
         {/* {is_external ? (
           <div className="absolute right-2 top-2 z-10 rounded-md bg-dark-300/70 px-2 py-2 text-white">
             <ExternalIcon className="h-5 w-5" />
           </div>
         ) : null} */}
         <Image
-          alt={name}
+          alt={product.name}
           fill
           quality={100}
-          src={image ?? placeholder}
+          src={
+            isShop
+              ? (product as ShopType).cover_image ?? placeholder
+              : (product as ProductType).image ?? placeholder
+          }
           className="bg-light-500 object-cover dark:bg-dark-400"
           sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
@@ -58,7 +75,7 @@ export default function Card({ product }: { product: ProductType }) {
           <button
             onClick={goToContactUsPage}
             className={cn(
-              'relative z-[11] text-center font-medium text-light',
+              'relative z-[11] text-center font-medium text-light flex flex-col items-center gap-px',
               isGridCompact ? 'text-xs' : 'text-13px',
             )}
           >
@@ -76,25 +93,60 @@ export default function Card({ product }: { product: ProductType }) {
           </button>
         </div>
       </div>
-      <div className="flex items-start justify-between pt-3.5">
-        <div className="relative flex h-8 w-8 flex-shrink-0 overflow-hidden 4xl:h-9 4xl:w-9">
-          <Image
-            alt={shop?.name}
-            quality={100}
-            fill
-            src={shop?.logo ?? placeholder}
-            className="rounded-full bg-light-500 object-cover dark:bg-dark-400"
-            sizes="(max-width: 768px) 100vw,
+      <div
+        className={cn('relative flex  justify-between pt-3.5', {
+          'items-start': isShop,
+          'items-center': !isShop,
+        })}
+      >
+        <div
+          className={cn({
+            'p-1.5 rounded-full -translate-y-2/3 bg-dark-200 absolute z-20':
+              isShop,
+          })}
+        >
+          <div
+            className={cn({
+              'relative flex h-20 w-20 flex-shrink-0 overflow-hidden 4xl:h-24 4xl:w-24':
+                isShop,
+              'relative flex h-8 w-8 flex-shrink-0 overflow-hidden 4xl:h-9 4xl:w-9':
+                !isShop,
+            })}
+          >
+            <Image
+              alt={
+                isShop
+                  ? (product as ShopType).name ?? ''
+                  : (product as ProductType).shop?.name ?? ''
+              }
+              quality={100}
+              fill
+              src={
+                isShop
+                  ? (product as ShopType).logo ?? placeholder
+                  : (product as ProductType).shop?.logo ?? placeholder
+              }
+              className="rounded-full bg-light-500 object-cover dark:bg-dark-400"
+              sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw"
-          />
+            />
+          </div>
         </div>
-        <div className="-mt-[1px] flex flex-col truncate ltr:mr-auto ltr:pl-2.5 rtl:ml-auto rtl:pr-2.5 rtl:text-right">
+        <div
+          className={cn({
+            '-mt-[4px] flex flex-col truncate ml-24': isShop,
+            '-mt-[1px] flex flex-col truncate ltr:mr-auto ltr:pl-2.5 rtl:ml-auto rtl:pr-2.5 rtl:text-right':
+              !isShop,
+          })}
+        >
           <h3
-            title={name}
-            className="mb-0.5 truncate font-medium text-dark-100 dark:text-light"
+            title={product.name}
+            className="mb-0.5 truncate font-medium text-dark-100 dark:text-light capitalize"
           >
-            <AnchorLink href={routes.product(product.uid)}>{name}</AnchorLink>
+            <AnchorLink href={routes.product(product.uid)}>
+              {product.name}
+            </AnchorLink>
           </h3>
           {/* <AnchorLink
             href={routes.shopUrl(shop?.slug)}
@@ -104,7 +156,7 @@ export default function Card({ product }: { product: ProductType }) {
           </AnchorLink> */}
         </div>
 
-        <div className="flex flex-shrink-0 flex-col items-end pl-2.5">
+        {/* <div className="flex flex-shrink-0 flex-col items-end pl-2.5">
           <span className="rounded-2xl bg-light-500 px-1.5 py-0.5 text-13px font-semibold uppercase text-brand dark:bg-dark-300 dark:text-brand-dark">
             {isFreeItem ? t('text-free') : price}
           </span>
@@ -113,7 +165,7 @@ export default function Card({ product }: { product: ProductType }) {
               {basePrice}
             </del>
           )}
-        </div>
+        </div> */}
       </div>
     </motion.div>
   );

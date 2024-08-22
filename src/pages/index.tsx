@@ -16,9 +16,9 @@ import { dehydrate, QueryClient, useQuery } from 'react-query';
 // import { API_ENDPOINTS } from '@/data/client/endpoints';
 import CategoryFilter from '@/components/product/category-filter';
 // import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { getProductsFn } from '@/services/products';
+import { getProductsFn, getShopsFn } from '@/services/products';
 import { useMemo } from 'react';
-import { ProductType } from '@/types/product';
+import { ProductType, ShopType } from '@/types/product';
 import { PageLoader } from '@/components/ui/loader/spinner/spinner';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -81,33 +81,25 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 function Products() {
   const { query } = useRouter();
-  // const { products, loadMore, hasNextPage, isLoadingMore, isLoading } =
-  //   useProducts({
-  //     ...(query.category && { categories: query.category }),
-  //     ...(query.price && { price: query.price }),
-  //     sortedBy: 'DESC',
-  //   });
-  const productQuery = useQuery(['get_products'], () => {
-    return getProductsFn();
+  const shopsQuery = useQuery(['get_shops'], () => {
+    return getShopsFn();
   });
 
-  const products = useMemo(() => {
-    if (productQuery.data?.data) {
-      return productQuery.data.data as ProductType[];
+  const shops = useMemo(() => {
+    if (shopsQuery.data?.data) {
+      return shopsQuery.data.data as ShopType[];
     }
     return [];
-  }, [productQuery.isLoading, productQuery.data]);
+  }, [shopsQuery.isLoading, shopsQuery.data]);
 
-  // if (productQuery.isLoading) <PageLoader text="Loading..." />;
+  if (shopsQuery.isLoading) return <PageLoader text="Loading..." />;
 
   return (
     <Grid
-      products={products}
+      products={shops}
       limit={3000}
-      // onLoadMore={loadMore}
-      // hasNextPage={hasNextPage}
-      // isLoadingMore={isLoadingMore}
-      isLoading={productQuery.isLoading}
+      isLoading={shopsQuery.isLoading}
+      isHome
     />
   );
 }

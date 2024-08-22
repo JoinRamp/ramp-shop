@@ -3,6 +3,16 @@ import request from './index';
 
 export const getProductsFn = async () => {
   try {
+    const res = await request.get('/marketplace/products');
+
+    return res.data;
+  } catch (error) {
+    throw new Error(getErrorMessage(error));
+  }
+};
+
+export const getShopsFn = async () => {
+  try {
     const res = await request.get('/marketplace');
 
     return res.data;

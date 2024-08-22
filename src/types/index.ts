@@ -167,6 +167,7 @@ export interface Shop {
   description: string;
   orders_count: number;
   products_count: number;
+  shop_website_link?: string;
   logo: Attachment;
   cover_image: Attachment;
   settings: {

@@ -15,18 +15,21 @@ import { useQuery } from 'react-query';
 const ProductPage = () => {
   const { query } = useRouter();
 
-  const productQuery = useQuery(['get_product', query.productSlug], () => {
-    return getProductDetailFn(query.productSlug as string);
-  });
+  const shopDetailsQuery = useQuery(
+    ['get_shop_details', query.productSlug],
+    () => {
+      return getProductDetailFn(query.productSlug as string);
+    },
+  );
 
-  const products = useMemo(() => {
-    if (productQuery.data?.data) {
-      return productQuery.data.data;
+  const shopDetails = useMemo(() => {
+    if (shopDetailsQuery.data?.data) {
+      return shopDetailsQuery.data.data;
     }
     return [];
-  }, [productQuery.isLoading, productQuery.data]);
+  }, [shopDetailsQuery.isLoading, shopDetailsQuery.data]);
 
-  if (productQuery.isLoading) {
+  if (shopDetailsQuery.isLoading) {
     return (
       <div className="py-32">
         <PageLoader />
@@ -34,13 +37,13 @@ const ProductPage = () => {
     );
   }
 
-  if (productQuery.isError && !productQuery.isLoading) {
+  if (shopDetailsQuery.isError && !shopDetailsQuery.isLoading) {
     <div className="py-32">
       <ItemNotFound title="No help found 😔" message="" />
     </div>;
   }
 
-  return <Single products={products} />;
+  return <Single products={shopDetails} />;
 };
 
 ProductPage.getLayout = function getLayout(page: any) {
