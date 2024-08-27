@@ -73,8 +73,7 @@ const Single: React.FC<SingleProps> = ({ products, prd }) => {
 
   const formatPrice = (p: number) => {
     const amt = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
+      style: 'decimal',
     }).format(p ?? 0);
 
     return amt;
@@ -182,7 +181,7 @@ const Single: React.FC<SingleProps> = ({ products, prd }) => {
 
                               <div className="flex flex-shrink-0 flex-col items-end pl-2.5">
                                 <span className="rounded-2xl bg-light-500 px-2.5 py-0.5 text-13px font-semibold uppercase text-black dark:bg-dark-300 dark:text-brand-dark">
-                                  {formatPrice(p.price)}
+                                  {p.currency ?? ''} {formatPrice(p.price)}
                                 </span>
                               </div>
                             </div>
