@@ -28,7 +28,7 @@ export default function PromoCarousel() {
           prevEl: '.prev',
         }}
       >
-        {[1, 2, 3, 4, 5].map((nu) => (
+        {[1, 2, 3, 4].map((nu) => (
           <SwiperSlide
             key={`promo-carousel-key-${nu}`}
             className="relative mb-5 aspect-[37/16] w-full  bg-light-200 dark:bg-dark-250 2xl:mb-6"
