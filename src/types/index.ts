@@ -161,12 +161,14 @@ export interface Attachment {
 }
 
 export interface Shop {
+  currency: string;
   id: string;
   name: string;
   slug: string;
   description: string;
   orders_count: number;
   products_count: number;
+  shop_website_link?: string;
   logo: Attachment;
   cover_image: Attachment;
   settings: {
@@ -419,6 +421,7 @@ export interface RatingCount {
 
 export interface Product {
   id: string;
+  uid: string;
   name: string;
   slug: string;
   description: string;
@@ -426,7 +429,7 @@ export interface Product {
   sale_price: number;
   orders_count: number;
   total_downloads: number;
-  image: Attachment;
+  image: Attachment | string;
   gallery: Attachment[];
   shop: Shop;
   created_at: string;
@@ -447,6 +450,7 @@ export interface Product {
   is_external: boolean;
   external_product_url: string;
   external_product_button_text: string;
+  currency: string;
 }
 
 export interface ProductPaginator extends PaginatorInfo<Product> {}

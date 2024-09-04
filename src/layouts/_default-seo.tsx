@@ -1,8 +1,8 @@
-import { useSettings } from '@/data/settings';
+// import { useSettings } from '@/data/settings';
 import { DefaultSeo as NextDefaultSeo } from 'next-seo';
 
 const DefaultSeo = () => {
-  const { settings } = useSettings();
+  // const { settings } = useSettings();
   return (
     <NextDefaultSeo
       additionalMetaTags={[
@@ -21,39 +21,35 @@ const DefaultSeo = () => {
       ]}
       additionalLinkTags={[
         {
-          rel: 'apple-touch-icon',
-          href: 'icons/apple-icon-180.png',
-        },
-        {
           rel: 'manifest',
           href: '/manifest.json',
         },
       ]}
-      title={'JoinRamp'}
-      titleTemplate={'Ramp'}
-      defaultTitle="Ramp"
-      description={'Ramp'}
-      canonical={settings?.seo?.canonicalUrl}
-      openGraph={{
-        title: settings?.seo?.ogTitle,
-        description: settings?.seo?.ogDescription,
-        type: 'website',
-        locale: 'en_US',
-        site_name: 'Ramp',
-        images: [
-          {
-            url: '/ramp-fav-black.svg',
-            width: 800,
-            height: 600,
-            alt: 'Ramp',
-          },
-        ],
-      }}
-      twitter={{
-        handle: settings?.seo?.twitterHandle,
-        site: settings?.siteTitle,
-        cardType: settings?.seo?.twitterCardType,
-      }}
+      title={'Ramp | New Customers, More Sales'}
+      titleTemplate={'Ramp | New Customers, More Sales'}
+      defaultTitle="Ramp | New Customers, More Sales"
+      description={'Ramp | New Customers, More Sales'}
+      // canonical={settings?.seo?.canonicalUrl}
+      // openGraph={{
+      //   title: settings?.seo?.ogTitle,
+      //   description: settings?.seo?.ogDescription,
+      //   type: 'website',
+      //   locale: 'en_US',
+      //   site_name: 'Ramp',
+      //   images: [
+      //     {
+      //       url: '/ramp-fav-black.svg',
+      //       width: 800,
+      //       height: 600,
+      //       alt: 'Ramp',
+      //     },
+      //   ],
+      // }}
+      // twitter={{
+      //   handle: settings?.seo?.twitterHandle,
+      //   site: settings?.siteTitle,
+      //   cardType: settings?.seo?.twitterCardType,
+      // }}
     />
   );
 };

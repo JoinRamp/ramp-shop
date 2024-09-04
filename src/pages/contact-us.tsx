@@ -19,26 +19,51 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useEffect, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
+import emailjs from '@emailjs/browser';
+import toast from 'react-hot-toast';
 
 const ContactUsPage: NextPageWithLayout = () => {
   const { t } = useTranslation('common');
-  const { settings } = useSettings();
-  const { contactDetails } = settings ?? {};
+  // const { settings } = useSettings();
+  // const { contactDetails } = settings ?? {};
   let [reset, setReset] = useState<CreateContactUsInput | null>(null);
-  const { mutate, isLoading, isSuccess } = useContactUs();
+  // const { mutate, isLoading, isSuccess } = useContactUs();
+  const [isLoading, setIsLoading] = useState(false);
+
   const onSubmit: SubmitHandler<CreateContactUsInput> = (values) => {
-    mutate(values);
+    console.log('we haveeee', values);
+    setIsLoading(true);
+    emailjs
+      .sendForm('service_ewzpuhk', 'template_oyo3xgg', 'form#contact-form', {
+        publicKey: 'weDXa0EwuDJErDthv',
+      })
+      .then(
+        () => {
+          setIsLoading(false);
+          setReset({
+            name: '',
+            email: '',
+            subject: '',
+            description: '',
+          });
+          toast.success('Message Sent');
+        },
+        (error) => {
+          console.log('FAILED...', error, error.text);
+          setIsLoading(false);
+        },
+      );
   };
-  useEffect(() => {
-    if (isSuccess) {
-      setReset({
-        name: '',
-        email: '',
-        subject: '',
-        description: '',
-      });
-    }
-  }, [isSuccess]);
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     setReset({
+  //       name: '',
+  //       email: '',
+  //       subject: '',
+  //       description: '',
+  //     });
+  //   }
+  // }, [isSuccess]);
 
   return (
     <>
@@ -64,9 +89,7 @@ const ContactUsPage: NextPageWithLayout = () => {
               <ContactInfo
                 icon={<LocationIcon className="h-12 w-12" />}
                 title={t('contact-us-office-title')}
-                description={
-                  '17, Fatai Aina Close,  Ojodu Estate, Ojo Lagos State'
-                }
+                description={'17, Fatai Aina Close,  Ojodu Estate, Lagos State'}
               />
               <ContactInfo
                 icon={<PhoneIcon className="h-10 w-10" />}
