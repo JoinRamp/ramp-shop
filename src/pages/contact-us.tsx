@@ -94,7 +94,7 @@ const ContactUsPage: NextPageWithLayout = () => {
               <ContactInfo
                 icon={<PhoneIcon className="h-10 w-10" />}
                 title={t('contact-us-phone-title')}
-                description={'+234 9123200364'}
+                description={'+234 2018891783'}
               />
               <ContactInfo
                 icon={<MailIcon className="h-10 w-10" />}
