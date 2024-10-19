@@ -89,7 +89,7 @@ const ContactUsPage: NextPageWithLayout = () => {
               <ContactInfo
                 icon={<LocationIcon className="h-12 w-12" />}
                 title={t('contact-us-office-title')}
-                description={'17, Fatai Aina Close,  Ojodu Estate, Lagos State'}
+                description={'1 Fatai Aina Close,  Ojodu Estate, Lagos State'}
               />
               <ContactInfo
                 icon={<PhoneIcon className="h-10 w-10" />}
